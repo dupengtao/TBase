@@ -13,7 +13,7 @@ import com.dpt.tbase.app.fragment.TBaseFragment;
 import com.dpt.tbase.app.fragment.TFragmentFactory;
 
 /**
- * 基础FragmentActivity
+ * BaseFragmentActivity
  * 
  * @author dupengtao@cyou-inc.com 2014-3-20
  */
