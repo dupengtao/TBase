@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+         <RelativeLayout
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_centerInParent="true"
+             android:layout_gravity="center"
+             android:gravity="center" >
+
+             <ImageView
+                 android:id="@+id/ivNoWork"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerInParent="true" />
+
+             <TextView
+                 android:id="@+id/tvNoWork"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/ivNoWork"
+                 android:layout_centerInParent="true"
+                 android:layout_marginTop="@dimen/dimen_20"
+                 android:textSize="@dimen/font_16" />
+
+             <TextView
+                 android:id="@+id/tvNoWorkHint"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/tvNoWork"
+                 android:layout_centerInParent="true"
+                 android:layout_marginTop="@dimen/dimen_16"
+                 android:textSize="@dimen/font_14" />
+
+             <TextView
+                 android:id="@+id/tvNoWorkAction"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/tvNoWorkHint"
+                 android:layout_centerInParent="true"
+                 android:layout_marginTop="@dimen/dimen_16"
+                 android:text="@string/reload"
+                 android:gravity="center"
+                 android:padding="@dimen/dimen_10"
+                 android:textSize="@dimen/font_14" />
+
+         </RelativeLayout>
+

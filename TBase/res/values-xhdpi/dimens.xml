@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="common_text_size_small">13dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_16">16dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <!-- sp -->
+    <dimen name="font_14">14sp</dimen>
+    <dimen name="font_16">16sp</dimen>
+
+</resources>

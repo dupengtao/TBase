@@ -1,0 +1,10 @@
+/gen
+/assets
+/bin
+/gradle
+/libs
+/build.gradle
+/gradlew
+/gradlew.bat
+/local.properties
+/TBase.iml
