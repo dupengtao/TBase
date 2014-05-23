@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.dpt.tbase.app.base.exception.NetNotConnException;
 import com.dpt.tbase.app.net.TBaseNetClent;
-import com.dpt.tbase.app.net.interfaces.AbResultCallBack;
+import com.dpt.tbase.app.net.interfaces.AbStrResultCallBack;
 
 /**
  * @author dupengtao@cyou-inc.com
@@ -16,9 +16,9 @@ import com.dpt.tbase.app.net.interfaces.AbResultCallBack;
 public class TBaseEngine {
 
     protected void excute(Context context, final IUiBaseResultCallBack<?> uiCb,
-            AbResultCallBack abResultCallBack, String url) {
+            AbStrResultCallBack abStrResultCallBack, String url) {
         try {
-            TBaseNetClent.executeRequest(context, url, null,TBaseNetClent.TYPE_JSON, abResultCallBack);
+            TBaseNetClent.executeRequest(context, url, null,TBaseNetClent.TYPE_JSON, abStrResultCallBack);
         } catch (NetNotConnException e1) {
             uiCb.noNetworkEnvironment();
         } catch (NullPointerException e1) {
@@ -26,9 +26,9 @@ public class TBaseEngine {
         }
     }
     protected void excute4String(Context context, final IUiBaseResultCallBack<?> uiCb,
-    		AbResultCallBack abResultCallBack, String url) {
+    		AbStrResultCallBack abStrResultCallBack, String url) {
     	try {
-    		TBaseNetClent.executeRequest(context, url, null,TBaseNetClent.TYPE_STRING, abResultCallBack);
+    		TBaseNetClent.executeRequest(context, url, null,TBaseNetClent.TYPE_STRING, abStrResultCallBack);
     	} catch (NetNotConnException e1) {
     		uiCb.noNetworkEnvironment();
     	} catch (NullPointerException e1) {

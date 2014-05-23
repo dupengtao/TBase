@@ -18,7 +18,9 @@ import com.dpt.tbase.app.application.TBaseApplication;
 import com.dpt.tbase.app.base.exception.NetNotConnException;
 import com.dpt.tbase.app.base.utils.LogHelper;
 import com.dpt.tbase.app.base.utils.NetWorkUtil;
-import com.dpt.tbase.app.net.interfaces.INetStringClientCallBack;
+import com.dpt.tbase.app.net.interfaces.INetBaseClientCallBack;
+import com.dpt.tbase.app.net.interfaces.INetJsonClientCallBack;
+import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
 
 /**
  * 网络数据请求
@@ -35,7 +37,7 @@ public abstract class TBaseNetClent {
 
 	public static void executeRequest(Context context, String url,
 			Map<String, String> params, int type,
-			INetStringClientCallBack callBack) {
+			INetBaseClientCallBack callBack) {
 
 		if (!NetWorkUtil.checkNetWork(context)) {
 			LogHelper.e(TAG, "unable to connect to the network !");
@@ -52,26 +54,27 @@ public abstract class TBaseNetClent {
 		}
 
 		if (TYPE_JSON == type) {
+		    INetJsonClientCallBack jsonClientCallBack=(INetJsonClientCallBack)callBack;
 			TBaseApplication.getInstance().addToRequestQueue(
-					getTBaseJsonRequest(context, url, callBack));
+					getTBaseJsonRequest(context, url, jsonClientCallBack));
 		} else {
+		    INetStrClientCallBack strClientCallBack=(INetStrClientCallBack)callBack;
 			TBaseApplication.getInstance().addToRequestQueue(
-					getTBaseStringRequest(context, url, callBack));
+					getTBaseStringRequest(context, url, strClientCallBack));
 		}
 
 	}
 
 	private static TBaseJsonObjectRequest getTBaseJsonRequest(
 			final Context context, String url,
-			final INetStringClientCallBack callBack) {
+			final INetJsonClientCallBack callBack) {
 		callBack.onStartCallBack();
 		TBaseJsonObjectRequest request = new TBaseJsonObjectRequest(Method.GET,
 				url, null, new Listener<JSONObject>() {
 
 					@Override
 					public void onResponse(JSONObject response) {
-						callBack.onSuccessCallBack(200, null,
-								response.toString());
+						callBack.onSuccessCallBack(response);
 						callBack.onFinishCallBack();
 					}
 				}, new ErrorListener() {
@@ -84,15 +87,14 @@ public abstract class TBaseNetClent {
 	}
 
 	private static StringRequest getTBaseStringRequest(final Context context,
-			String url, final INetStringClientCallBack callBack) {
+			String url, final INetStrClientCallBack callBack) {
 		callBack.onStartCallBack();
 
 		StringRequest stringRequest = new StringRequest(url,
 				new Response.Listener<String>() {
 					@Override
 					public void onResponse(String response) {
-						callBack.onSuccessCallBack(200, null,
-								response.toString());
+						callBack.onSuccessCallBack(200,response.toString(),null);
 						callBack.onFinishCallBack();
 					}
 				}, new Response.ErrorListener() {
@@ -107,7 +109,7 @@ public abstract class TBaseNetClent {
 	}
 
 	private static void processError(final Context context,
-			final INetStringClientCallBack callBack, VolleyError error) {
+			final INetBaseClientCallBack callBack, VolleyError error) {
 		String message = "";
 		try {
 			message = VolleyErrorHelper.getMessage(error, context);
