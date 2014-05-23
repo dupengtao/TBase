@@ -27,27 +27,14 @@ public interface IFraCommCB {
      */
     void onErrorStateListener(int state);
 
-    /**
-     * 异常状态下数据获取成功
-     * 貌似用onErrorStateListener 就可以了
-     * @param state 0 成功 1 没有网络  2 异常
-     */
-    @Deprecated
-    void onSuccessOfErrorStateListener(int state);
 
     /**
      * 数据加载开始时切换样式
      * 
      * @param 4.loading
      */
-    @Deprecated
+    
     void onStartListener(int state);
 
-    /**
-     * 第一次成功加载数据后的回调
-     * 
-     * @param t
-     */
-    void onSuccessoOfFirstLoad(int state);
 
 }

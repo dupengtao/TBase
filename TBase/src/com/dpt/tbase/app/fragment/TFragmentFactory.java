@@ -50,7 +50,7 @@ public class TFragmentFactory {
     }
 
     /**
-     * if true {@link #createFragment(Class)} return newInstance else throw exception
+     * if true {@link #createFragment(Class)} return newInstance else {@link TFragmentFactory#createFragment(Class)} throw exception
      * @param fraKey {@link TBaseFragment#getKey()}
      */
     public boolean putAndAddCache(String fraKey, Class<? extends TBaseFragment> clazz) {

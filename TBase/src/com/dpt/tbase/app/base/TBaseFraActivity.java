@@ -211,31 +211,12 @@ public abstract class TBaseFraActivity extends FragmentActivity implements
         showCompatibleFra(state);
     }
 
-    @Override
-    @Deprecated
-    public void onSuccessOfErrorStateListener(int state) {
-        switch (state) {
-            case IFraCommCB.STATE_SUCCESS: {
-                switchContentBack();
-            }
-        }
-        mCompatibleFra.refreshComplete();
-    }
 
     @Override
     public void onStartListener(int state) {
         showCompatibleFra(state);
     }
-
-    @Override
-    @Deprecated
-    public void onSuccessoOfFirstLoad(int state) {
-        switch (state) {
-            case IFraCommCB.STATE_SUCCESS: {
-                switchContentBack();
-            }
-        }
-    }
+ 
 
     /**
      * @see FragmentTransaction#setCustomAnimations(int, int)
