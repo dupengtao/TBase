@@ -1,21 +1,22 @@
 package com.dpt.tbase.app.net;
 
-import java.util.Map;
+import java.io.File;
 
 import org.json.JSONObject;
 
 import android.content.Context;
 import android.text.TextUtils;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.dpt.tbase.app.application.TBaseApplication;
 import com.dpt.tbase.app.base.exception.NetNotConnException;
@@ -33,39 +34,50 @@ import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
  */
 public abstract class TBaseNetClent {
 
-    private static String TAG = "TBaseNetClent";
-    public static final int TYPE_JSON = 1;
+    private static String TAG = TBaseNetClent.class.getSimpleName();
+    public static final int TYPE_TREADER_JSON = 1;
     public static final int TYPE_STRING = 2;
+    public static final int TYPE_JSON = 3;
 
-    public static void executeRequest(Context context, String url, Map<String, String> params, int type,
+    
+    public static void executeRequest(Request<?> request) {
+        executeRequest(true, null, request);
+    }
+    
+    public static void executeRequest(boolean isShouldCache, String resTag ,Request<?> request) {
+        addQueue(isShouldCache, resTag, request);
+    }
+    
+    public static void executeRequest(Context context, String url, int type,
             INetBaseClientCallBack callBack) {
-        executeRequest(context, url, params, type, true, null, callBack);
+        executeRequest(context, url, type, true, null, callBack);
     }
 
-    public static void executeRequest(Context context, String url, Map<String, String> params, int type,
-            boolean isShouldCache,String resTag,INetBaseClientCallBack callBack) {
+    public static void executeRequest(Context context, String url, int type,
+            boolean isShouldCache, String resTag, INetBaseClientCallBack callBack) {
         check(context, url, callBack);
-        if (TYPE_JSON == type) {
-            INetJsonClientCallBack jsonClientCallBack = (INetJsonClientCallBack) callBack;
-            TBaseJsonObjectRequest request = getTBaseJsonRequest(context, url, jsonClientCallBack);
-            setRequestParams(isShouldCache, resTag, request);
-            
-        } else {
+        Request<?> request ;
+        if (TYPE_STRING == type) {
             INetStrClientCallBack strClientCallBack = (INetStrClientCallBack) callBack;
-            StringRequest request = getTBaseStringRequest(context, url, strClientCallBack);
-            setRequestParams(isShouldCache, resTag, request);
+            request = getTBaseStringRequest(context, url, strClientCallBack);
+        } else if (TYPE_JSON == type) {
+            INetJsonClientCallBack jsonClientCallBack = (INetJsonClientCallBack) callBack;
+            request = getJsonRequest(context, url, jsonClientCallBack);
+        } else {// shoud use executeRequest(Request<?> request)
+            INetJsonClientCallBack jsonClientCallBack = (INetJsonClientCallBack) callBack;
+            request = getTReaderJsonRequest(context, url, jsonClientCallBack);
         }
-
+        addQueue(isShouldCache, resTag, request);
     }
 
-    public static void setRequestParams(boolean isShouldCache, String resTag, Request<?> request) {
-        if(!isShouldCache){
+    public static void addQueue(boolean isShouldCache, String resTag, Request<?> request) {
+        if (!isShouldCache) {
             request.setShouldCache(false);
         }
-        if(TextUtils.isEmpty(resTag)){
+        if (TextUtils.isEmpty(resTag)) {
             TBaseApplication.getInstance().addToRequestQueue(request);
-        }else{
-            TBaseApplication.getInstance().addToRequestQueue(request,resTag);
+        } else {
+            TBaseApplication.getInstance().addToRequestQueue(request, resTag);
         }
     }
 
@@ -85,7 +97,28 @@ public abstract class TBaseNetClent {
         }
     }
 
-    private static TBaseJsonObjectRequest getTBaseJsonRequest(
+    private static JsonObjectRequest getJsonRequest(
+            final Context context, String url,
+            final INetJsonClientCallBack callBack) {
+        callBack.onStartCallBack();
+        JsonObjectRequest request = new JsonObjectRequest(Method.GET,
+                url, null, new Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        callBack.onSuccessCallBack(response);
+                        callBack.onFinishCallBack();
+                    }
+                }, new ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        processError(context, callBack, error);
+                    }
+                });
+        return request;
+    }
+
+    private static TBaseJsonObjectRequest getTReaderJsonRequest(
             final Context context, String url,
             final INetJsonClientCallBack callBack) {
         callBack.onStartCallBack();
@@ -134,7 +167,7 @@ public abstract class TBaseNetClent {
         try {
             message = VolleyErrorHelper.getMessage(error, context);
             message += "statusCode" + error.networkResponse.statusCode;
-            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            LogHelper.e(TAG, message);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -147,5 +180,28 @@ public abstract class TBaseNetClent {
             int errorResId) {
         TBaseApplication.getInstance().getImageLoader().get(requestUrl, ImageLoader.getImageListener(
                 imageView, roadingResId, errorResId));
+    }
+    
+    public static void cacheRemove(String url){
+        TBaseApplication.getInstance().getRequestQueue().getCache().remove(url);
+    }
+    public static void cacheClear(){
+        TBaseApplication.getInstance().getRequestQueue().getCache().clear();
+    }
+    public static void cancelSingleRequest(String reqTag){
+        TBaseApplication.getInstance().getRequestQueue().cancelAll(reqTag);
+    }
+    public static void cancelAllRequests(){
+        TBaseApplication.getInstance().getRequestQueue().cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
+    }
+    
+    public static long getCacheSize(Context context){
+        File cacheDir = new File(context.getCacheDir(), "volley");
+        return cacheDir.length();
     }
 }
