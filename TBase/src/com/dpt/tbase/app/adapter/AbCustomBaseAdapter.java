@@ -1,6 +1,7 @@
 package com.dpt.tbase.app.adapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.widget.BaseAdapter;
@@ -12,7 +13,7 @@ public abstract class AbCustomBaseAdapter<T> extends BaseAdapter {
     
     public AbCustomBaseAdapter() {
         super();
-        list = new ArrayList<T>();
+        list = Collections.emptyList();
     }
 
     @Override

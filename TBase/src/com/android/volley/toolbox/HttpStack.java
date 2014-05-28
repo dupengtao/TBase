@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * An HTTP stack abstraction.HTTP堆栈的抽象。
+ * An HTTP stack abstraction.
  */
 public interface HttpStack {
     /**

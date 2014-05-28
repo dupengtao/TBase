@@ -18,7 +18,7 @@ public class TBaseApplication extends Application {
     /**
      * Log or request TAG
      */
-    public static final String TAG = "VolleyPatterns";
+    public static final String TAG = "TBaseApplication";
 
     /**
      * Global request queue for Volley
