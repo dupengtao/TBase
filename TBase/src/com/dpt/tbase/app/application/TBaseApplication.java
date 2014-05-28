@@ -6,7 +6,9 @@ import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.dpt.tbase.app.base.utils.LruBitmapCache;
 /**
  * 
  * @author dupengtao@cyou-inc.com
@@ -18,12 +20,14 @@ public class TBaseApplication extends Application {
     /**
      * Log or request TAG
      */
-    public static final String TAG = "TBaseApplication";
+    public static final String TAG = TBaseApplication.class.getSimpleName();
 
     /**
      * Global request queue for Volley
      */
     private RequestQueue mRequestQueue;
+    
+    private ImageLoader mImageLoader;
 
     /**
      * A singleton instance of the application class for easy access in other places
@@ -97,5 +101,14 @@ public class TBaseApplication extends Application {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+    
+    public ImageLoader getImageLoader() {
+        getRequestQueue();
+        if (mImageLoader == null) {
+            mImageLoader = new ImageLoader(this.mRequestQueue,
+                    new LruBitmapCache());
+        }
+        return this.mImageLoader;
     }
 }
