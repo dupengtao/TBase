@@ -27,7 +27,6 @@ import com.dpt.tbase.app.net.interfaces.INetJsonClientCallBack;
 import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
 
 /**
- * 网络数据请求
  * 
  * @author dupengtao@cyou-inc.com
  *         2014-4-10
