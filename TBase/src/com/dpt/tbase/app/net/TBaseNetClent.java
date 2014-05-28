@@ -27,7 +27,6 @@ import com.dpt.tbase.app.net.interfaces.INetJsonClientCallBack;
 import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
 
 /**
- * 网络数据请求
  * 
  * @author dupengtao@cyou-inc.com
  *         2014-4-10
@@ -39,7 +38,9 @@ public abstract class TBaseNetClent {
     public static final int TYPE_STRING = 2;
     public static final int TYPE_JSON = 3;
 
-    
+    /**
+     * post or custom request
+     */
     public static void executeRequest(Request<?> request) {
         executeRequest(true, null, request);
     }
