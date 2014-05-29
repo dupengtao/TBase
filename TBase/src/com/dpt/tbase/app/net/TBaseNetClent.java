@@ -38,7 +38,9 @@ public abstract class TBaseNetClent {
     public static final int TYPE_STRING = 2;
     public static final int TYPE_JSON = 3;
 
-    
+    /**
+     * post
+     */
     public static void executeRequest(Request<?> request) {
         executeRequest(true, null, request);
     }
