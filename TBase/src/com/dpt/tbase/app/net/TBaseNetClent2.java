@@ -34,7 +34,7 @@ import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
 @SuppressWarnings("rawtypes")
 public class TBaseNetClent2 {
 
-    private TBaseNetClent2 netClent2;
+    private static TBaseNetClent2 netClent2;
     private RequestFractory mRequestFractory;
     private String TAG = TBaseNetClent2.class.getSimpleName();
     public final int TYPE_TREADER_JSON = 1;
@@ -48,7 +48,7 @@ public class TBaseNetClent2 {
      * if requestFractory is null use {@link TBaseRequestFractory}
      * 
      */
-    public TBaseNetClent2 getInstance(RequestFractory requestFractory){
+    public static TBaseNetClent2 getInstance(RequestFractory requestFractory){
         if(netClent2==null){
             if(requestFractory==null){
                 requestFractory= new TBaseRequestFractory();
@@ -57,7 +57,13 @@ public class TBaseNetClent2 {
         }
         return netClent2;
     }
-
+    
+    public void setRequestFractory(RequestFractory requestFractory) {
+        if(requestFractory==null){
+            requestFractory= new TBaseRequestFractory();
+        }
+       mRequestFractory = requestFractory;
+    }
     /**
      * custom request 
      */
