@@ -84,7 +84,7 @@ public class TBaseNetClent2 {
         Request request ;
         if (TYPE_STRING == type) {
             INetStrClientCallBack strClientCallBack = (INetStrClientCallBack) callBack;
-            request = getTBaseStringRequest(context,method, url, strClientCallBack);
+            request = getStringRequest(context,method, url, strClientCallBack);
         } else{
             INetJsonClientCallBack jsonClientCallBack = (INetJsonClientCallBack) callBack;
             request = getJsonRequest(context,method, url, jsonClientCallBack);
@@ -146,7 +146,7 @@ public class TBaseNetClent2 {
             throw new NullPointerException("callback not find !");
         }
     }
-    private JsonObjectRequest getJsonRequest( final Context context,int method, String url,
+    private Request getJsonRequest( final Context context,int method, String url,
             final INetJsonClientCallBack callBack) {
         callBack.onStartCallBack();
         Listener<JSONObject> listener = new Listener<JSONObject>() {
@@ -157,11 +157,10 @@ public class TBaseNetClent2 {
             }
         };
         ErrorListener errorListener = getErrorListener(context, callBack);
-        JsonObjectRequest request = new JsonObjectRequest(method,url,null,listener , errorListener);
-        return request;
+        return mRequestFractory.produceJsonRequest(method, url, listener, errorListener);
     }
     
-    private Request getTBaseStringRequest(final Context context,int method,
+    private Request getStringRequest(final Context context,int method,
             String url, final INetStrClientCallBack callBack) {
         callBack.onStartCallBack();
         Listener<String> listener = new Response.Listener<String>() {
@@ -172,8 +171,7 @@ public class TBaseNetClent2 {
             }
         };
         ErrorListener errorListener = getErrorListener(context, callBack);
-        Request stringRequest = mRequestFractory.produceStringRequest(method, url, listener, errorListener);
-        return stringRequest;
+        return mRequestFractory.produceStringRequest(method, url, listener, errorListener);
     }
 
     private ErrorListener getErrorListener(final Context context, final INetBaseClientCallBack callBack) {
