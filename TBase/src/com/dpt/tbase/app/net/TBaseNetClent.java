@@ -30,8 +30,10 @@ import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
  * 
  * @author dupengtao@cyou-inc.com
  *         2014-4-10
+ * @Deprecated use {@link TBaseNetClent2}
  */
-public abstract class TBaseNetClent {
+@Deprecated
+public class TBaseNetClent {
 
     private static String TAG = TBaseNetClent.class.getSimpleName();
     public static final int TYPE_TREADER_JSON = 1;
