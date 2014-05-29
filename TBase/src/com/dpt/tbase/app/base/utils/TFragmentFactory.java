@@ -1,4 +1,4 @@
-package com.dpt.tbase.app.fragment;
+package com.dpt.tbase.app.base.utils;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
-import com.dpt.tbase.app.base.utils.TFraLruCache;
+import com.dpt.tbase.app.fragment.TBaseFragment;
 
 public class TFragmentFactory {
     private static final Map<String, Class<? extends TBaseFragment>> fraKeys = new HashMap<String, Class<? extends TBaseFragment>>();

@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentTransaction;
 import com.dpt.tbase.app.base.interfaces.IFraCommCB;
 import com.dpt.tbase.app.base.utils.LogHelper;
 import com.dpt.tbase.app.base.utils.TFraLruCache;
+import com.dpt.tbase.app.base.utils.TFragmentFactory;
 import com.dpt.tbase.app.fragment.AbCompatibleFragment;
 import com.dpt.tbase.app.fragment.AbCompatibleFragment.CompatibleListener;
 import com.dpt.tbase.app.fragment.TBaseFragment;
-import com.dpt.tbase.app.fragment.TFragmentFactory;
 
 /**
  * BaseFragmentActivity
