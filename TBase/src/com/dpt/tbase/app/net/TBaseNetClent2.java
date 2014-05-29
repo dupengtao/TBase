@@ -34,12 +34,11 @@ import com.dpt.tbase.app.net.interfaces.INetStrClientCallBack;
 @SuppressWarnings("rawtypes")
 public class TBaseNetClent2 {
 
+    public final static int TYPE_JSON = 1;
+    public final static int TYPE_STRING = 2;
     private static TBaseNetClent2 netClent2;
     private RequestFractory mRequestFractory;
     private String TAG = TBaseNetClent2.class.getSimpleName();
-    public final int TYPE_TREADER_JSON = 1;
-    public final int TYPE_STRING = 2;
-    public final int TYPE_JSON = 3;
     
     private TBaseNetClent2(RequestFractory requestFractory) {
         mRequestFractory = requestFractory;
