@@ -15,7 +15,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.dpt.tbase.app.application.TBaseApplication;
 import com.dpt.tbase.app.base.exception.NetNotConnException;
 import com.dpt.tbase.app.base.utils.LogHelper;
