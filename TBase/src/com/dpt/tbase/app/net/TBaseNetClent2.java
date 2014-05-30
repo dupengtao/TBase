@@ -46,7 +46,7 @@ public class TBaseNetClent2 {
      * if requestFractory is null use {@link TBaseRequestFractory}
      * 
      */
-    public static TBaseNetClent2 getInstance(RequestFractory requestFractory){
+    public static synchronized TBaseNetClent2 getInstance(RequestFractory requestFractory){
         if(netClent2==null){
             if(requestFractory==null){
                 requestFractory= new TBaseRequestFractory();
