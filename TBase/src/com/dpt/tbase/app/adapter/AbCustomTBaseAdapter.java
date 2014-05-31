@@ -6,12 +6,12 @@ import java.util.List;
 
 import android.widget.BaseAdapter;
 
-public abstract class AbCustomBaseAdapter<T> extends BaseAdapter {
+public abstract class AbCustomTBaseAdapter<T> extends BaseAdapter {
 
     private List<T> list;
     
     
-    public AbCustomBaseAdapter() {
+    public AbCustomTBaseAdapter() {
         super();
         list = Collections.emptyList();
     }
