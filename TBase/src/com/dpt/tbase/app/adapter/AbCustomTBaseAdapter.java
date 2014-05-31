@@ -13,7 +13,7 @@ public abstract class AbCustomTBaseAdapter<T> extends BaseAdapter {
     
     public AbCustomTBaseAdapter() {
         super();
-        list = Collections.emptyList();
+        list = new ArrayList<T>();
     }
 
     @Override
