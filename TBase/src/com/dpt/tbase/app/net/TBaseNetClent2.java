@@ -37,7 +37,7 @@ public class TBaseNetClent2 {
     public final static int TYPE_STRING = 2;
     private static TBaseNetClent2 netClent2;
     private RequestFractory mRequestFractory;
-    private String TAG = TBaseNetClent2.class.getSimpleName();
+    private static final String TAG = TBaseNetClent2.class.getSimpleName();
     
     private TBaseNetClent2(RequestFractory requestFractory) {
         mRequestFractory = requestFractory;
@@ -85,6 +85,7 @@ public class TBaseNetClent2 {
      */
     public void executeRequest(Context context,int method,String url, int type, boolean isShouldCache, String resTag, INetBaseClientCallBack callBack)
     throws NetNotConnException,NullPointerException{
+    	LogHelper.e(TAG, url);
         check(context, url, callBack);
         Request request ;
         if (TYPE_STRING == type) {
@@ -97,20 +98,21 @@ public class TBaseNetClent2 {
         addQueue(isShouldCache, resTag, request);
     }
     
-    public void executeImageRequest(String requestUrl, ImageView imageView, int roadingResId,int errorResId) {
+    public static void executeImageRequest(String requestUrl, ImageView imageView, int roadingResId,int errorResId) {
+    	LogHelper.e(TAG, requestUrl);
         TBaseApplication.getInstance().getImageLoader().get(requestUrl, ImageLoader.getImageListener(imageView, roadingResId, errorResId));
     }
     
-    public void cacheRemove(String url){
+    public static void cacheRemove(String url){
         TBaseApplication.getInstance().getRequestQueue().getCache().remove(url);
     }
-    public void cacheClear(){
+    public static void cacheClear(){
         TBaseApplication.getInstance().getRequestQueue().getCache().clear();
     }
-    public void cancelSingleRequest(String reqTag){
+    public static void cancelSingleRequest(String reqTag){
         TBaseApplication.getInstance().getRequestQueue().cancelAll(reqTag);
     }
-    public void cancelAllRequests(){
+    public static void cancelAllRequests(){
         TBaseApplication.getInstance().getRequestQueue().cancelAll(new RequestQueue.RequestFilter() {
             @Override
             public boolean apply(Request<?> request) {
@@ -121,7 +123,7 @@ public class TBaseNetClent2 {
     /**
      * count cache size
      */
-    public long getCacheSize(Context context){
+    public static long getCacheSize(Context context){
         File cacheDir = new File(context.getCacheDir(), "volley");
         return cacheDir.length();
     }
