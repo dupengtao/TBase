@@ -65,7 +65,7 @@ public class TBaseNetClent2 {
     /**
      * custom request 
      */
-    public void executeRequest(Request request) {
+    public void executeRequest(Request request) throws NetNotConnException,NullPointerException{
         executeRequest(true, null, request);
     }
     
@@ -73,7 +73,7 @@ public class TBaseNetClent2 {
         addQueue(isShouldCache, resTag, request);
     }
     
-    public void executeRequest(Context context,int method, String url, int type, INetBaseClientCallBack callBack) {
+    public void executeRequest(Context context,int method, String url, int type, INetBaseClientCallBack callBack) throws NetNotConnException,NullPointerException{
         executeRequest(context,method,url,type, true, null, callBack);
     }
     /**
@@ -83,7 +83,8 @@ public class TBaseNetClent2 {
      * @param resTag add request by tag
      * @param callBack {@link INetBaseClientCallBack}
      */
-    public void executeRequest(Context context,int method,String url, int type, boolean isShouldCache, String resTag, INetBaseClientCallBack callBack) {
+    public void executeRequest(Context context,int method,String url, int type, boolean isShouldCache, String resTag, INetBaseClientCallBack callBack)
+    throws NetNotConnException,NullPointerException{
         check(context, url, callBack);
         Request request ;
         if (TYPE_STRING == type) {
