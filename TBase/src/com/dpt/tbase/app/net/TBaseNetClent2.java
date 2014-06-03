@@ -62,7 +62,11 @@ public class TBaseNetClent2 {
         }
        mRequestFractory = requestFractory;
     }
-    /**
+    
+    public RequestFractory getRequestFractory() {
+		return mRequestFractory;
+	}
+	/**
      * custom request 
      */
     public void executeRequest(Request request) throws NetNotConnException,NullPointerException{
