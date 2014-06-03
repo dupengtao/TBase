@@ -20,7 +20,7 @@ public class TFragmentFactory {
         mTFraCache = new TFraLruCache(maxSize, fragmentManager);
     }
 
-    public static TFragmentFactory initFractory(int maxSize, FragmentManager fragmentManager) {
+    public static synchronized TFragmentFactory initFractory(int maxSize, FragmentManager fragmentManager) {
         if (mInstance == null) {
             mInstance = new TFragmentFactory(maxSize, fragmentManager);
         }
