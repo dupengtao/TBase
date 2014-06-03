@@ -123,9 +123,8 @@ public abstract class TBaseFraActivity extends FragmentActivity implements
                     if (targetFra.isAddCache()) {
                         TFragmentFactory.getInstance().putAndAddCache(targetFra.getKey(),
                                 targetFra.getClass());
-                    } else {
-                        TFragmentFactory.getInstance().put(targetFra.getKey(), targetFra.getClass());
-                    }
+                    } 
+                    TFragmentFactory.getInstance().put(targetFra.getKey(), targetFra.getClass());
                     // mTFraCache.put(targetFra.getKey(), targetFra);
                     // TFragmentFactory.fraKeys.put(targetFra.getKey(), targetFra.getClass());
                 } catch (Exception e) {

@@ -9,7 +9,12 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
-
+/**
+ * 
+ * @author dupengtao@cyou-inc.com
+ * @deprecated 此类已放到Treader中
+ * 2014-6-3
+ */
 public class TBaseJsonObjectRequest extends JsonObjectRequest {
 
     public TBaseJsonObjectRequest(int method, String url, JSONObject jsonRequest,

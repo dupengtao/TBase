@@ -5,6 +5,13 @@ import org.json.JSONObject;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
+/**
+ * 
+ * @author dupengtao@cyou-inc.com
+ * @deprecated 此类已放到Treader中
+ * 2014-6-3
+ */
+@Deprecated
 @SuppressWarnings("rawtypes")
 public class TReaderRequestFractory implements RequestFractory {
 

@@ -36,7 +36,7 @@ public class TBaseNetClent2 {
     public final static int TYPE_JSON = 1;
     public final static int TYPE_STRING = 2;
     private static TBaseNetClent2 netClent2;
-    private RequestFractory mRequestFractory;
+    private static RequestFractory mRequestFractory;
     private static final String TAG = TBaseNetClent2.class.getSimpleName();
     
     private TBaseNetClent2(RequestFractory requestFractory) {
@@ -56,14 +56,11 @@ public class TBaseNetClent2 {
         return netClent2;
     }
     
-    public void setRequestFractory(RequestFractory requestFractory) {
-        if(requestFractory==null){
-            requestFractory= new TBaseRequestFractory();
-        }
+    public static void setRequestFractory(RequestFractory requestFractory) {
        mRequestFractory = requestFractory;
     }
     
-    public RequestFractory getRequestFractory() {
+    public static RequestFractory getRequestFractory() {
 		return mRequestFractory;
 	}
 	/**

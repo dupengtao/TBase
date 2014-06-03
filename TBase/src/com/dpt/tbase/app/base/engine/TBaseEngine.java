@@ -42,7 +42,8 @@ public class TBaseEngine {
 	protected void excute(Context context, String url, boolean isShouldCache,
 			final IUiBaseResultCallBack<?> uiCb, AbJsonResultCallBack callBack) {
 		try {
-			TBaseNetClent2.getInstance(null)
+		    RequestFractory fractory = TBaseNetClent2.getRequestFractory();
+			TBaseNetClent2.getInstance(fractory)
 					.executeRequest(context, Request.Method.GET, url,
 							TBaseNetClent2.TYPE_JSON, callBack);
 		} catch (NetNotConnException e1) {
@@ -82,7 +83,8 @@ public class TBaseEngine {
 			final IUiBaseResultCallBack<?> uiCb,
 			AbStrResultCallBack abStrResultCallBack) {
 		try {
-			TBaseNetClent2.getInstance(null).executeRequest(context,
+		    RequestFractory fractory = TBaseNetClent2.getRequestFractory();
+			TBaseNetClent2.getInstance(fractory).executeRequest(context,
 					Request.Method.GET, url, TBaseNetClent2.TYPE_STRING,
 					abStrResultCallBack);
 		} catch (NetNotConnException e1) {
