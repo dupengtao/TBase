@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentManager;
 import com.dpt.tbase.app.fragment.TBaseFragment;
 
 public class TFragmentFactory {
+	
+	private static final String TAG=TFragmentFactory.class.getSimpleName();
+	
     private static final Map<String, Class<? extends TBaseFragment>> fraKeys = new HashMap<String, Class<? extends TBaseFragment>>();
 
     private static TFragmentFactory mInstance;
@@ -54,12 +57,15 @@ public class TFragmentFactory {
      * @param fraKey {@link TBaseFragment#getKey()}
      */
     public boolean putAndAddCache(String fraKey, Class<? extends TBaseFragment> clazz) {
-        TBaseFragment tfra = createFragment(fraKeys.put(fraKey, clazz));
+    	put(fraKey, clazz);
+        TBaseFragment tfra = createFragment(clazz);
         if (tfra != null) {
             mTFraCache.put(fraKey, tfra);
         } else {
+        	LogHelper.e(TAG, "3333333333");
             return false;
         }
+        LogHelper.e(TAG, "44444444444");
         return true;
     }
 
@@ -79,5 +85,9 @@ public class TFragmentFactory {
             fragment = createFragment(fraKey);
         }
         return (TBaseFragment) fragment;
+    }
+    
+    public boolean isAdd(String key){
+    	return fraKeys.get(key)!=null;
     }
 }
