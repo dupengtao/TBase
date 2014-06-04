@@ -62,10 +62,8 @@ public class TFragmentFactory {
         if (tfra != null) {
             mTFraCache.put(fraKey, tfra);
         } else {
-        	LogHelper.e(TAG, "3333333333");
             return false;
         }
-        LogHelper.e(TAG, "44444444444");
         return true;
     }
 
