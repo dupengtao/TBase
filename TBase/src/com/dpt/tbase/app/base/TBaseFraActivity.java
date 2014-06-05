@@ -24,7 +24,7 @@ public abstract class TBaseFraActivity extends FragmentActivity implements
     protected TBaseFragment mCur, mPre;
     protected AbCompatibleFragment mCompatibleFra;
     protected boolean mSingleFragment;
-    private int mMaxCacheSize = 12;
+    private int mMaxCacheSize = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
