@@ -56,15 +56,13 @@ public class TFragmentFactory {
      * if true {@link #createFragment(Class)} return newInstance else {@link TFragmentFactory#createFragment(Class)} throw exception
      * @param fraKey {@link TBaseFragment#getKey()}
      */
-    public boolean putAndAddCache(String fraKey, Class<? extends TBaseFragment> clazz) {
+    public TBaseFragment putAndAddCache(String fraKey, Class<? extends TBaseFragment> clazz) {
     	put(fraKey, clazz);
         TBaseFragment tfra = createFragment(clazz);
         if (tfra != null) {
             mTFraCache.put(fraKey, tfra);
-        } else {
-            return false;
-        }
-        return true;
+        } 
+        return tfra;
     }
 
     public void put(String fraKey, Class<? extends TBaseFragment> clazz) {
