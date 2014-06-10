@@ -14,7 +14,6 @@ import com.dpt.tbase.app.fragment.TBaseFragment;
 
 /**
  * BaseFragmentActivity
- * test3
  * @author dupengtao@cyou-inc.com 2014-3-20
  */
 public abstract class TBaseFraActivity extends FragmentActivity implements
@@ -24,7 +23,7 @@ public abstract class TBaseFraActivity extends FragmentActivity implements
     protected TBaseFragment mCur, mPre;
     protected AbCompatibleFragment mCompatibleFra;
     protected boolean mSingleFragment;
-    private int mMaxCacheSize = 10;
+    private int mMaxCacheSize = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
