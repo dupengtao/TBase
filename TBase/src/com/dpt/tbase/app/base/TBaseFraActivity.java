@@ -15,7 +15,6 @@ import com.dpt.tbase.app.fragment.TBaseFragment;
 /**
  * BaseFragmentActivity
  * 
- * 
  * @author dupengtao@cyou-inc.com 2014-3-20
  */
 public abstract class TBaseFraActivity extends FragmentActivity implements
